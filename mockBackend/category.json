@@ -1,0 +1,25 @@
+{
+    "categories":[
+      {
+        "id": "jhhghg3653",
+        "categoryId": 0,
+        "categoryName": "Laptops",
+        "categoryDescription": "For laptops",
+        "createdAt": "2021-01-24T23:51:26.767Z"
+      },
+      {
+        "id": "536563trr",
+        "categoryId": 1,
+        "categoryName": "Consoles",
+        "categoryDescription": "For consoles",
+        "createdAt": "2021-01-24T23:51:26.767Z"
+      },
+      {
+        "id": "3fa85f33e",
+        "categoryId": 2,
+        "categoryName": "Phones",
+        "categoryDescription": "For phones",
+        "createdAt": "2021-01-24T23:51:26.767Z"
+      }
+    ]
+}

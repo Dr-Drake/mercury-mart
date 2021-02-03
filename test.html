@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Test</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <div id="root">
+            <button id="my-button">Press me</button>
+            <div id="response"></div>
+        </div>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script>
+            const button = document.getElementById("my-button");
+            const responseDiv = document.getElementById("response");
+            const headers = {
+                'Authorization': 'Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEzIiwiVXNlckVtYWlsIjoibXIuZHIuaWtlbUBnbWFpbC5jb20iLCJuYW1laWQiOiIxNCIsIlVzZXJUeXBlIjoiMSIsInJvbGUiOiJTeXN0ZW1BZG1pbiIsIm5iZiI6MTYxMjE3Njc5MCwiZXhwIjoxNjEyMjYzMTkwLCJpYXQiOjE2MTIxNzY3OTB9.MU8tVNeJWQYldQYn7wit_QsDn0wdzQdhEqNJGQeYX7ryL9kfgT18cliN84WUMQSTUlcPt-VPOt4keIQtmT_Z3A'  
+            }
+
+            button.addEventListener("click", (e)=>{
+                responseDiv.innerHTML += "waiting..."
+                axios.get("https://mercurymart.azurewebsites.net/api/Categories")
+                .then((response)=>{
+                    responseDiv.innerHTML += JSON.stringify(response.data)
+                })
+                .catch((err)=>{
+                    responseDiv.innerHTML += JSON.stringify(err)
+                })
+            })
+        </script>
+    </body>
+</html>

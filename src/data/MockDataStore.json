@@ -1,0 +1,46 @@
+{
+    "statusCode": 0,
+    "statusMessage": "Login Success!!!",
+    "objectValue": {
+        "token": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEzIiwiVXNlckVtYWlsIjoibXIuZHIuaWtlbUBnbWFpbC5jb20iLCJuYW1laWQiOiIxNCIsIlVzZXJUeXBlIjoiMSIsInJvbGUiOiJTeXN0ZW1BZG1pbiIsIm5iZiI6MTYxMTUyNzQwOSwiZXhwIjoxNjExNjEzODA5LCJpYXQiOjE2MTE1Mjc0MDl9.U01Iu-GpdQMwhxdHdSzcRkuB0tqyvUkl8CtAdKqE_-RBArEHVGvv11Mtu1mfsfdKOHFX5OHIsLcyyW8OYizz3w",
+        "user": {
+            "id": 13,
+            "userType": 1,
+            "userTypeId": 14,
+            "emailConfirmed": false,
+            "lastLoginDateTime": "2021-01-24T22:30:08.7013205+00:00",
+            "secondToLastLoginDateTime": null,
+            "userRoles": [
+                {
+                    "role": {
+                        "id": 2,
+                        "name": "SystemAdmin"
+                    }
+                }
+            ]
+        },
+        "userProfileInformation": {
+            "administratorId": 14,
+            "fullName": "Ikem Ikem",
+            "emailAddress": "mr.dr.ikem@gmail.com",
+            "userId": 13,
+            "createdAt": "2021-01-22T10:48:48.1479855+00:00",
+            "user": {
+                "id": 13,
+                "userType": 1,
+                "userTypeId": 14,
+                "emailConfirmed": false,
+                "lastLoginDateTime": "2021-01-24T22:30:08.7013205+00:00",
+                "secondToLastLoginDateTime": null,
+                "userRoles": [
+                    {
+                        "role": {
+                            "id": 2,
+                            "name": "SystemAdmin"
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}

@@ -1,0 +1,17 @@
+::-webkit-scrollbar {
+    width: 7px;
+    height: 100%;
+}
+
+::-webkit-scrollbar-thumb {
+background: transparent;
+transition: background-color .6s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+background-color:  #6c7293;
+}
+
+::-webkit-scrollbar-track {
+background: #191c24;
+}

@@ -1,0 +1,88 @@
+{
+    "products": [
+        {
+            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "productId": 0,
+            "productName": "MacBook Pro",
+            "productDescription": "This is a macbook",
+            "productPrice": 650000,
+            "categoryId": 0,
+            "productSerialNumber": "123456",
+            "attachmentLink": null,
+            "attachmentPublicId": null,
+            "attachmentFileName": null,
+            "createdAt": "2021-01-24T23:46:21.874Z",
+            "deletedAt": "2021-01-24T23:46:21.874Z"
+        },
+        {
+            "id": "3fa85eeee562-b3fc-2c963f66afa6",
+            "productId": 0,
+            "productName": "MacBook Pro",
+            "productDescription": "This is a macbook",
+            "productPrice": 650000,
+            "categoryId": 0,
+            "productSerialNumber": "123459",
+            "attachmentLink": null,
+            "attachmentPublicId": null,
+            "attachmentFileName": null,
+            "createdAt": "2021-01-24T23:46:21.874Z",
+            "deletedAt": "2021-01-24T23:46:21.874Z"
+        },
+        {
+            "id": "3fa85f64-5717-4562-b3fc-2c966afa6",
+            "productId": 0,
+            "productName": "Lenovo T53",
+            "productDescription": "This is a Laptop",
+            "productPrice": 257000,
+            "categoryId": 0,
+            "productSerialNumber": "123457",
+            "attachmentLink": null,
+            "attachmentPublicId": null,
+            "attachmentFileName": null,
+            "createdAt": "2021-01-24T23:46:21.874Z",
+            "deletedAt": "2021-01-24T23:46:21.874Z"
+        },
+        {
+            "id": "3ff64-5717-4562-b3fc-2c963f66afa6",
+            "productId": 0,
+            "productName": "Playstation 4",
+            "productDescription": "This is a playstation",
+            "productPrice": 180000,
+            "categoryId": 0,
+            "productSerialNumber": "55874",
+            "attachmentLink": null,
+            "attachmentPublicId": null,
+            "attachmentFileName": null,
+            "createdAt": "2021-01-24T23:46:21.874Z",
+            "deletedAt": "2021-01-24T23:46:21.874Z"
+        },
+        {
+            "id": "3fa85f17-4562-b3fc-2c963f66afa6",
+            "productId": 0,
+            "productName": "iPhone 7",
+            "productDescription": "This is an iPhone",
+            "productPrice": 195000,
+            "categoryId": 0,
+            "productSerialNumber": "111223",
+            "attachmentLink": null,
+            "attachmentPublicId": null,
+            "attachmentFileName": null,
+            "createdAt": "2021-01-24T23:46:21.874Z",
+            "deletedAt": "2021-01-24T23:46:21.874Z"
+        },
+        {
+            "id": "3fa85f17-4562-b3fc-2c963f66afa6",
+            "productId": 0,
+            "productName": "Xbox 360",
+            "productDescription": "This is an Xbox",
+            "productPrice": 60000,
+            "categoryId": 1,
+            "productSerialNumber": "16562990",
+            "attachmentLink": null,
+            "attachmentPublicId": null,
+            "attachmentFileName": null,
+            "createdAt": "2021-01-24T23:46:21.874Z",
+            "deletedAt": "2021-01-24T23:46:21.874Z"
+        }
+    ]
+}
