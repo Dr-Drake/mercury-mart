@@ -6,33 +6,37 @@ import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import { useTheme } from '@material-ui/core/styles';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
-import CloseIcon from '@material-ui/icons/Close';
-import Typography from '@material-ui/core/Typography';
-import AddIcon from '@material-ui/icons/Add';
-import Tooltip from '@material-ui/core/Tooltip';
-import Chip from '@material-ui/core/Chip';
-import Divider from '@material-ui/core/Divider';
 import SerialTableBackbone from '../../Tables/TableBackbone/SerialTableBackbone';
 import TableCell from '@material-ui/core/TableCell';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
+import { BoxLoading } from 'react-loadingg';
+import Backdrop from '@material-ui/core/Backdrop';
+import MenuItem from '@material-ui/core/MenuItem';
+import axios from 'axios';
+import { mutate } from 'swr'
 
 export default function AddProduct(props){
     const {
-        prevCallback
+        prevCallback,
+        categories
     } = props
     const theme = useTheme();
     const classes = useStyles(theme);
     const [serials, setSerials] = React.useState([]);
     const [open, setOpen] = React.useState(false);
+    const [errOpen, setErrOpen] = React.useState(false);
+    const [successOpen, setSuccessOpen] = React.useState(false);
+    const [isAdding, setIsAdding] = React.useState(false);
+    const [category, setCategory] = React.useState(categories.length > 0 ? categories[0].categoryId : null)
     const [errors, setErrors] = React.useState({
-        name: false,
-        category: false,
-        serial: false,
-        price: false,
-        description: false
+        productName: false,
+        categoryId: false,
+        productSerialNumber: false,
+        productPrice: false,
+        productCost: false,
+        productDescription: false
     })
 
     // Refs
@@ -40,6 +44,8 @@ export default function AddProduct(props){
     const nameRef = React.useRef(null);
    
     const handleClose = () =>{ setOpen(false)}
+    const handleErrClose = () =>{setErrOpen(false)}
+    const handleSuccessClose = ()=>{ setSuccessOpen(false)}
     const handleBack = () => {prevCallback()}
     
     const addSerialCallback = (value)=>{
@@ -73,7 +79,6 @@ export default function AddProduct(props){
             }
         }
         setErrors(clone)
-        setOpen(true)
 
         if (count > 0){
             return false
@@ -100,14 +105,58 @@ export default function AddProduct(props){
         setSerials(clone)
     }
 
+    const handleCategoryChange = (e) =>{
+        unhighlight(e);
+        setCategory(e.target.value);
+    }
+
+    const addProducts = async (fdata)=>{
+        let responses = [];
+        try{
+            for (let i = 0; i < serials.length; i++){
+                let serial = serials[i];
+                fdata.set('productSerialNumber', serial.serial);
+
+                let response = await axios({
+                    method: 'post',
+                    url: process.env.PRODUCTS_API,
+                    data: fdata,
+                    headers: {'Content-Type': 'multipart/form-data'}
+                })
+
+                if (response){
+                    responses.push(response.data)
+                }
+            }
+
+            let resolvedResponses = await Promise.all(responses);
+            if (resolvedResponses){
+                mutate(process.env.PRODUCTS_API);
+                setIsAdding(false)
+                setSuccessOpen(true);
+            }
+
+        }catch(err){
+            setIsAdding(false);
+            setErrOpen(true);
+        }
+    }
+
     const handleSubmit = (e) =>{
         e.preventDefault();
-        validateInputs();
-        const form = formRef.current
-        const fdata = new FormData(form);
-        const name = fdata.get("name")
-        
-        //alert(JSON.stringify(...fdata));
+        setIsAdding(true);
+        const val = validateInputs();
+
+        if (val){
+            const form = formRef.current
+            const fdata = new FormData(form);
+
+            addProducts(fdata);
+        } else{
+            setIsAdding(false)
+            setOpen(true)
+        }
+    
     }
 
     const priceAdornment = (
@@ -148,11 +197,13 @@ export default function AddProduct(props){
         return cells;
 
     }
-
     
 
     return(
         <React.Fragment>
+            <Backdrop className={classes.backdrop} open={isAdding} >
+                <BoxLoading />
+            </Backdrop>
             <Snackbar
                 open={open}
                 anchorOrigin={{vertical: "top", horizontal: "right"}}
@@ -160,6 +211,24 @@ export default function AddProduct(props){
             >
                 <Alert severity="error" onClose={handleClose}>
                     Please fill in all the required fields
+                </Alert>
+            </Snackbar>
+            <Snackbar
+                open={errOpen}
+                anchorOrigin={{vertical: "top", horizontal: "right"}}
+                onClose={handleErrClose}
+            >
+                <Alert severity="error" onClose={handleErrClose}>
+                   An error occured while adding the product
+                </Alert>
+            </Snackbar>
+            <Snackbar
+                open={successOpen}
+                anchorOrigin={{vertical: "bottom", horizontal: "right"}}
+                onClose={handleSuccessClose}
+            >
+                <Alert severity="success" onClose={handleSuccessClose}>
+                   Product successfully added
                 </Alert>
             </Snackbar>
             
@@ -193,7 +262,7 @@ export default function AddProduct(props){
                                             <Grid item xs={12}>
                                                 <TextField
                                                 required
-                                                error={errors.name}
+                                                error={errors.productName}
                                                 classes={{root: classes.textField}}
                                                 id="product-name"
                                                 variant="outlined"
@@ -205,7 +274,7 @@ export default function AddProduct(props){
                                                     classes:{root:classes.inputLabel}
                                                 }}
                                                 InputProps={{
-                                                    name: "name",
+                                                    name: "productName",
                                                     classes:{root:classes.inputField}
                                                 }}
                                                 inputRef={nameRef}
@@ -215,28 +284,7 @@ export default function AddProduct(props){
                                             <Grid item xs={12} sm={12} md={6}>
                                                 <TextField
                                                     required
-                                                    error={errors.category}
-                                                    classes={{root: classes.textField}}
-                                                    id="product-category"
-                                                    variant="outlined"
-                                                    label="Category"
-                                                    fullWidth
-                                                    margin="dense"
-                                                    InputLabelProps={{
-                                                        shrink: true,
-                                                        classes:{root:classes.inputLabel}
-                                                    }}
-                                                    InputProps={{
-                                                        name: "category",
-                                                        classes:{root:classes.inputField}
-                                                    }}
-                                                    onChange={unhighlight}
-                                                />
-                                            </Grid>
-                                            <Grid item xs={12} sm={12} md={6}>
-                                                <TextField
-                                                    required
-                                                    error={errors.serial}
+                                                    error={errors.productSerialNumber}
                                                     classes={{root: classes.textField}}
                                                     id="product-serial-number"
                                                     variant="outlined"
@@ -248,16 +296,80 @@ export default function AddProduct(props){
                                                         classes:{root:classes.inputLabel}
                                                     }}
                                                     InputProps={{
-                                                        name: "serial",
+                                                        name: "productSerialNumber",
                                                         classes:{root:classes.inputField}
                                                     }}
                                                     onChange={handleChange}
                                                 />
                                             </Grid>
+                                            <Grid item xs={12} sm={6} md={6}>
+                                                <TextField
+                                                    required
+                                                    error={errors.category}
+                                                    classes={{root: classes.textField}}
+                                                    id="product-category"
+                                                    select
+                                                    fullWidth
+                                                    margin="dense"
+                                                    label="Category"
+                                                    value={category}
+                                                    onChange={handleCategoryChange}
+                                                    helperText="Please select a category"
+                                                    variant="outlined"
+                                                    InputLabelProps={{
+                                                        shrink: true,
+                                                        classes:{root:classes.inputLabel}
+                                                    }}
+                                                    InputProps={{
+                                                        name: "categoryId",
+                                                        classes:{root:classes.inputField}
+                                                    }}
+                                                    FormHelperTextProps={{
+                                                        classes:{root: classes.helperText}
+                                                    }}
+                                                    SelectProps={{
+                                                        classes: {icon: classes.selectIcon}
+                                                    }}
+                                                >
+                                                    { categories.length > 0 ? 
+                                                    categories.map((category) => (
+                                                        <MenuItem key={category.categoryId} value={category.categoryId}>
+                                                            {category.categoryName}
+                                                        </MenuItem>
+                                                    )) :
+                                                    <MenuItem value={null}>
+                                                        {''}
+                                                    </MenuItem>
+                                                    }
+                                                </TextField>
+                                            </Grid>
                                             <Grid item xs={12} sm={6}>
                                                 <TextField
                                                     required
-                                                    error={errors.price}
+                                                    error={errors.productCost}
+                                                    classes={{root: classes.textField}}
+                                                    id="product-cost"
+                                                    variant="outlined"
+                                                    label="Cost"
+                                                    type="number"
+                                                    fullWidth
+                                                    margin="dense"
+                                                    InputLabelProps={{
+                                                        shrink: true,
+                                                        classes:{root:classes.inputLabel}
+                                                    }}
+                                                    InputProps={{
+                                                        startAdornment: priceAdornment,
+                                                        name: "productCost",
+                                                        classes:{root:classes.inputField}
+                                                    }}
+                                                    onChange={unhighlight}
+                                                />  
+                                            </Grid>
+                                            <Grid item xs={12} sm={6}>
+                                                <TextField
+                                                    required
+                                                    error={errors.productPrice}
                                                     classes={{root: classes.textField}}
                                                     id="product-price"
                                                     variant="outlined"
@@ -271,7 +383,7 @@ export default function AddProduct(props){
                                                     }}
                                                     InputProps={{
                                                         startAdornment: priceAdornment,
-                                                        name: "price",
+                                                        name: "productPrice",
                                                         classes:{root:classes.inputField}
                                                     }}
                                                     onChange={unhighlight}
@@ -282,8 +394,9 @@ export default function AddProduct(props){
                                                     classes={{root: classes.textField}}
                                                     id="product-image"
                                                     variant="outlined"
-                                                    label="Price"
+                                                    label="Image"
                                                     type="file"
+                                                    name="attachmentFile"
                                                     fullWidth
                                                     margin="dense"
                                                     InputLabelProps={{
@@ -291,7 +404,6 @@ export default function AddProduct(props){
                                                         classes:{root:classes.inputLabel}
                                                     }}
                                                     InputProps={{
-                                                        name: "image",
                                                         classes:{root:classes.inputField},
                                                     }}
                                                     onChange={unhighlight}
@@ -300,7 +412,7 @@ export default function AddProduct(props){
                                             <Grid item xs={12}>
                                                 <TextField
                                                     required
-                                                    error={errors.description}
+                                                    error={errors.productDescription}
                                                     classes={{root: classes.textField}}
                                                     id="product-description"
                                                     variant="outlined"
@@ -314,7 +426,7 @@ export default function AddProduct(props){
                                                         classes:{root:classes.inputLabel}
                                                     }}
                                                     InputProps={{
-                                                        name: "description",
+                                                        name: "productDescription",
                                                         classes:{root:classes.inputField},
                                                     }}
                                                     onChange={unhighlight}

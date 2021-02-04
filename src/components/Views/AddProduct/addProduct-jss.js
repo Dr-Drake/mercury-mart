@@ -113,7 +113,20 @@ const useStyles = makeStyles( (theme) =>({
                 borderColor: 'white',
             },
         },
-    }
+    },
+
+    backdrop: {
+        zIndex: 1000,
+        color: '#fff',
+    },
+
+    helperText:{
+        color: "#6c7293"
+    },
+
+    selectIcon:{
+        color: "white !important"
+     },
 }))
 
 export default useStyles;

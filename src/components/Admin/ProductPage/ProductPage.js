@@ -3,35 +3,49 @@ import ProductToolbar from '../../Toolbar/ProductToolbar/ProductToolbar';
 import ProductTable from '../../Tables/ProductTable/ProductTable';
 import React from 'react';
 import mapToField from '../../../utils/mapToField';
-import {useProduct} from '../../../hooks/dataFetch';
+import reorder from '../../../utils/reorder';
+import formatDate from '../../../utils/formatDate';
+import { useProduct, useCategories } from '../../../hooks/dataFetch';
 import { actions } from '../../../redux/AdminActionCreators'
 import { connect } from 'react-redux';
 import { useState } from 'react';
 import AddProduct from '../../Views/AddProduct/AddProduct';
-import CatergoryTable from '../../Tables/CatergoryTable/CategoryTable';
 import PageToolbar from '../../Toolbar/PageToolbar/PageToolbar';
+import { BoxLoading } from 'react-loadingg';
+import Backdrop from '@material-ui/core/Backdrop';
+import useStyles from './productPage-jss';
 
 
 // Action creators
-const { loadProducts, loadProductsFilter } = actions
+const { 
+    loadProducts, loadProductsFilter, loadProductsRaw,
+    loadCategories
+} = actions
 
 const mapStateToProps = (dataStore) =>({
   ...dataStore
 });
 
 const mapDispatchToProps = {
-  loadProducts, loadProductsFilter,
+  loadProducts, loadProductsFilter, loadProductsRaw,
+  loadCategories,
 }
 
 
 
 function ProductPage(props){
+    const classes = useStyles();
     const [activeStep, setActiveStep] = useState(0);
-    const fields = ["name", "description", "price", "category", "quantity"];
-    const relevantKeys = ["productName", "productDescription", "categoryId", "productPrice", "createdAt"]
+    const [isDeleting, setIsDeleting] = useState(false)
+    const fields = ["name", "price", "cost", "category", "quantity"];
+    const order = ["name", "cost", "price", "category", "date", "quantity"]
+    const relevantKeys = [
+        "productName", "productPrice", "productCost",
+        "categoryId", "createdAt"
+    ]
     const map = {
         "productName": "name",
-        "productDescription": "description",
+        "productCost": "cost",
         "categoryId" : "category",
         "productPrice": "price",
         "createdAt" : "date"
@@ -50,6 +64,7 @@ function ProductPage(props){
     }
     
     const { products, isLoading, isError } = useProduct();
+    const categoryResult = useCategories();
 
     React.useEffect(()=>{
         
@@ -62,16 +77,26 @@ function ProductPage(props){
                 if (seen.includes(product.productName) === false){
                     seen.push(product.productName);
                     let mapped = mapToField(map, product, relevantKeys);
-                    data.push({...mapped, quantity: getQuantity(products, product.productName)})
+                    data.push(reorder({
+                        ...mapped, 
+                        quantity: getQuantity(products, product.productName),
+                        category: product.category.categoryName,
+                        date:formatDate(product.createdAt)
+                    }, order))
                 }
             }
             
             props.loadProducts(data);
             props.loadProductsFilter(data);
+            props.loadProductsRaw(products);
             //setTableData(data);
             //filteredData = data
         }
-    }, [isLoading])
+
+        if (categoryResult.isLoading === false){
+            props.loadCategories(categoryResult.categories);
+        }
+    }, [isLoading, products, categoryResult.isLoading, categoryResult.categories])
 
     let filteredData = props.products;
 
@@ -129,9 +154,16 @@ function ProductPage(props){
         setActiveStep(0)
     }
 
+    const loadingCallback = (status)=>{
+        setIsDeleting(status)
+    };
+
 
     return(
         <div style={{background: "#000"}} >
+            <Backdrop className={classes.backdrop} open={isDeleting} >
+                <BoxLoading />
+            </Backdrop>
             {
                 activeStep === 0 ?
                 <div style={{flexGrow: 1, padding: 20}}>
@@ -149,13 +181,19 @@ function ProductPage(props){
                         </Grid>
 
                         <Grid xs={12} item>
-                            <ProductTable data={props.productsFilter} isLoading={isLoading} />
+                            <ProductTable 
+                            data={props.productsFilter} 
+                            isLoading={isLoading}
+                            products={props.productsRaw}
+                            categories={props.categories}
+                            loadingCallback={loadingCallback} 
+                            />
                         </Grid>
 
                     </Grid>
                 </div>
                 :
-                <AddProduct prevCallback={prevCallback} />
+                <AddProduct prevCallback={prevCallback} categories={props.categories} />
         
             }
         </div>

@@ -14,7 +14,8 @@ const useStyles = makeStyles({
     nameCellDiv:{
         display: "flex",
         alignItems: "center",
-        padding: 0
+        padding: 0,
+        width: "100%"
     },
 
     nameCell:{

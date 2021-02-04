@@ -7,8 +7,10 @@ export const AdminActionTypes = {
     LOAD_USER: "load_user",
     LOAD_CUSTOMERS: "load_customers",
     LOAD_ORDERS: "load_orders",
+
     LOAD_PRODUCTS: "load_products",
     LOAD_PRODUCTS_FILTER: "load_products_filter",
+    LOAD_PRODUCTS_RAW: "load_products_raw",
     ADD_PRODUCT: "add_product",
     REMOVE_PRODUCT : "remove_product",
     UPDATE_PRODUCT: "update_product",

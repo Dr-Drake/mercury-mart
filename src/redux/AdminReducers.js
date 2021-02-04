@@ -14,6 +14,12 @@ export const productReducer = (prevStore, action)=>{
                 ...prevStore,
                 productsFilter: action.payload.products
             }
+        
+        case AdminActionTypes.LOAD_PRODUCTS_RAW:
+            return {
+                ...prevStore,
+                productsRaw: action.payload.products
+            }
 
         
         default:

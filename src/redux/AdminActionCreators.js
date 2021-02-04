@@ -23,6 +23,13 @@ export const actions = {
         }
     }),
 
+    loadProductsRaw: (productArray)=>({
+        type: AdminActionTypes.LOAD_PRODUCTS_RAW,
+        payload: {
+            products: productArray
+        }
+    }),
+
     loadProductsFilter: (productArray)=>({
         type: AdminActionTypes.LOAD_PRODUCTS_FILTER,
         payload: {

@@ -1,5 +1,4 @@
 import AddCategory from '../../Views/AddCategory/AddCategory';
-import AddProduct from '../../Views/AddProduct/AddProduct';
 import Grid from '@material-ui/core/Grid';
 import PageToolbar from '../../Toolbar/PageToolbar/PageToolbar';
 import CategoryTable from '../../Tables/CatergoryTable/CategoryTable';

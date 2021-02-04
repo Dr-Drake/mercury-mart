@@ -307,7 +307,10 @@ export default function SkeletonTabelBackBone(props){
                     })
                     }
                     <TableRow>
-                        <TableCell classes={{root:classes.bodyCell}} />
+                        {
+                            enableCheckBoxPading &&
+                            <TableCell classes={{root:classes.bodyCell}} />
+                        }
                         <TableCell classes={{root:classes.bodyCell}} />
                         <TableCell classes={{root:classes.bodyCell}} >
                             {

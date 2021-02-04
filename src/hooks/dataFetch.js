@@ -9,11 +9,12 @@ const fetcher = (...args) => axios.get(...args)
 .then((response)=> response.data.objectValue);
 
 const productFetcher = (...args) => axios.get(...args)
-.then((response)=> response.data);
+.then((response)=> response.data.objectValue);
 
 
-export function useProduct (id = '') {
-    const { data, error } = useSWR(`${process.env.PRODUCTS_API}/${id}`, productFetcher)
+export function useProduct () {
+    const { data, error } = useSWR(process.env.PRODUCTS_API, productFetcher)
+    console.log(data)
     return {
         products: data,
         isLoading: !error && !data,
