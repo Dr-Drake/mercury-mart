@@ -14,7 +14,6 @@ const productFetcher = (...args) => axios.get(...args)
 
 export function useProduct () {
     const { data, error } = useSWR(process.env.PRODUCTS_API, productFetcher)
-    console.log(data)
     return {
         products: data,
         isLoading: !error && !data,

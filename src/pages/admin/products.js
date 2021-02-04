@@ -11,7 +11,7 @@ const DynamicOrderPage = dynamic(
     { loading: () => <p>...Loading</p> }
   )
 
-export default function Admin(){
+export default function AdminProducts(){
 
     return(
         <React.Fragment>

@@ -44,7 +44,7 @@ export default function AdminSidebar(props){
                     <ListItemIcon>{Logo}</ListItemIcon>
                     <ListItemText
                         classes={{primary: classes.logo}} 
-                        primary={props.name? props.name : "Tech Store"} 
+                        primary={props.name? props.name : "Mercury Mart"} 
                     />
                 </ListItem>
             </List>

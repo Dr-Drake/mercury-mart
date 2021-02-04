@@ -1,12 +1,7 @@
 import Head from 'next/head';
-import {Grid} from "@material-ui/core";
 import React from "react";
 import AdminSidebar from "../../components/Sidebar/AdminSidebar";
-import AdminNavBar from "../../components/NavBar/AdminNavBar";
-import OrderSummary from '../../components/Order/OrderSummary';
-import OrderToolbar from '../../components/Toolbar/OrderToolbar/OrderFilterToolbar';
 import OrderPage from '../../components/Admin/OrderPage/OrderPage';
-import OrderTable from '../../components/Tables/OrderTable/OrderTable';
 import dynamic from 'next/dynamic';
 
 const DynamicOrderPage = dynamic(
@@ -14,7 +9,7 @@ const DynamicOrderPage = dynamic(
     { loading: () => <p>...Loading</p> }
   )
 
-export default function Admin(){
+export default function AdminOrders(){
 
     return(
         <React.Fragment>

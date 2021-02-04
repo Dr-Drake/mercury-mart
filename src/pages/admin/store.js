@@ -4,7 +4,7 @@ import React from "react";
 import AdminSidebar from "../../components/Sidebar/AdminSidebar";
 import AdminNavBar from "../../components/NavBar/AdminNavBar";
 
-export default function Admin(){
+export default function AdminStore(){
 
     return(
         <React.Fragment>
