@@ -2,7 +2,6 @@ import Head from 'next/head';
 import {Grid} from "@material-ui/core";
 import React from "react";
 import AdminSidebar from "../../components/Sidebar/AdminSidebar";
-import AdminNavBar from "../../components/NavBar/AdminNavBar";
 
 export default function AdminStore(){
 

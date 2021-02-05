@@ -1,8 +1,6 @@
 import Head from 'next/head';
-import {Grid} from "@material-ui/core";
 import React from "react";
 import AdminSidebar from "../../components/Sidebar/AdminSidebar";
-import SummaryChart from '../../components/Chart/SummaryChart';
 import Dashboard from '../../components/Admin/Dashboard/Dashboard';
 
 export default function Admin(){
