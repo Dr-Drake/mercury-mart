@@ -67,11 +67,20 @@ function FrontPage(props){
                 <Grid item xs={12}>
                     <Grid container spacing={3} >
                         {
+                            !isLoading ?
                             props.categories.map((category)=>(
                                 <Grid item xs={6} sm={4} md={4} >
                                     <CategoryCard
                                         title={category.categoryName}
                                         image={getImage(category.categoryId)}
+                                        isLoading={isLoading}
+                                    />
+                                </Grid>
+                            ))
+                            :
+                            [0, 1, 2, 3, 4].map((item)=>(
+                                <Grid item xs={6} sm={4} md={4} lg={3} >
+                                    <CategoryCard
                                         isLoading={isLoading}
                                     />
                                 </Grid>

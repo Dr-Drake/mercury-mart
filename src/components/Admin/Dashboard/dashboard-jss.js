@@ -6,7 +6,7 @@ const useStyles = makeStyles({
     },
 
     reportCards: {
-        backgroundColor: "palevioletred",
+        //backgroundColor: "palevioletred",
         width: "100%",
     }
 })

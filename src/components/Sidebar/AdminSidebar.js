@@ -26,7 +26,7 @@ export default function AdminSidebar(props){
     ]
 
     const Logo = (
-        <span><img src="/logo.png" style={{width: "30px"}} /></span>
+        <span><img src="/mercury-icon.png" style={{width: "30px", margin: "3px 0 0 3px"}} /></span>
     );
 
     

@@ -21,7 +21,10 @@ export default function Dashboard(props){
                     ))}
                     </Grid>
                 </Grid>
-                <Grid item style={{width: "100%", backgroundColor: "orange"}}>
+                <Grid item style={{
+                    width: "100%", 
+                    //backgroundColor: "orange"
+                    }}>
                     <Grid container spacing={3}>
                        <Grid item xs sm md={6}>
                            <ChartSummary />

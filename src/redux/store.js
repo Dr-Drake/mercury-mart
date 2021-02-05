@@ -1,6 +1,7 @@
 
 import {createStore} from "redux";
 import { productReducer, categoryReducer } from "./AdminReducers";
+import { cartReducer } from './StoreReducers';
 import { useMemo } from 'react'
 import {CommonReducer} from "./CommonReducer";
 import phData from './placeHolderStore';
@@ -14,7 +15,7 @@ let store
 
 function initStore(preloadedState = phData) {
   return createStore(
-    CommonReducer(productReducer, categoryReducer),
+    CommonReducer(productReducer, categoryReducer, cartReducer),
     preloadedState,
    )
 }

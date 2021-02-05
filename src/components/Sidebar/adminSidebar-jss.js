@@ -5,7 +5,7 @@ const useStyles = makeStyles({
         color: "white",
         fontWeight: "700",
         textTransform: "uppercase",
-        fontSize: "20px"
+        fontSize: "15px"
     },
 
     link:{

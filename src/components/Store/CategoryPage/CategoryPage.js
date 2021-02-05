@@ -60,7 +60,7 @@ function CategoryPage(props){
             <Grid container spacing={3} justify="center" >
                 <Grid item xs={12} md={10}>
                 <Typography
-                    variant="h3"
+                    variant="h4"
                     noWrap
                     classes={{root: classes.title}}
                 >
@@ -71,13 +71,23 @@ function CategoryPage(props){
                 <Grid item xs={12} md={10}>
                     <Grid container spacing={3} >
                         {
+                            !isLoading ?
                             props.products.map((product)=>(
-                                <Grid item xs={6} sm={4} md={4} >
+                                <Grid item xs={6} sm={4} md={4} lg={3} >
                                     <ProductCard
+                                        id={product.productId}
                                         name={product.productName} 
                                         image={product.attachmentLink}
                                         description={product.productDescription}
                                         price={product.productPrice}
+                                        isLoading={isLoading}
+                                    />
+                                </Grid>
+                            ))
+                            :
+                            [0, 1, 2, 3, 4, 5].map((item)=>(
+                                <Grid item xs={6} sm={4} md={4} lg={3} >
+                                    <ProductCard
                                         isLoading={isLoading}
                                     />
                                 </Grid>

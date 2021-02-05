@@ -4,6 +4,7 @@ const placeHolder = {
     productsRaw: [],
     categories: [],
     categoriesFilter:[],
+    cart: [],
 }
 
 export default placeHolder;

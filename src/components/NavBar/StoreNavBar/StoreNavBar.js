@@ -24,14 +24,18 @@ import MenuList from '@material-ui/core/MenuList';
 import Link from 'next/link';
 import useStyles from './storeNavBar-jss';
 import { useTheme } from '@material-ui/core/styles'
+import { useCookies } from 'react-cookie';
 
 export default function PrimarySearchAppBar() {
     const theme = useTheme()
     const classes = useStyles(theme);
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+    const [cookies, setCookie] = useCookies(['cart']);
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
+
+    let cart = React.useMemo(()=>{
+        return cookies.cart
+    }, [cookies])
   
     const handleToggle = () => {
       setOpen((prevOpen) => !prevOpen);
@@ -68,7 +72,7 @@ export default function PrimarySearchAppBar() {
 
     return (
         <div className={classes.grow}>
-        <AppBar position="static" classes={{root: classes.bar}}>
+        <AppBar position="sticky" classes={{root: classes.bar}}>
             <Toolbar classes={{root:classes.toolbar}}>
             <IconButton
                 edge="start"
@@ -132,12 +136,17 @@ export default function PrimarySearchAppBar() {
                     </Grow>
                 )}
                 </Popper>
-
-                <IconButton aria-label="shopping-cart" color="inherit">
-                    <Badge badgeContent={0} color="secondary">
-                        <ShoppingCartIcon />
-                    </Badge>
-                </IconButton>
+                
+                <Link href="/cart">
+                    <IconButton aria-label="shopping-cart" color="inherit" component="a" >
+                        <Badge 
+                            badgeContent={cart ? cart.length : 0} 
+                            color="secondary"
+                        >
+                            <ShoppingCartIcon />
+                        </Badge>
+                    </IconButton>
+                </Link>
             </div>
             <div className={classes.sectionDesktop} style={{backgroundColor: "orange"}}>
             </div>

@@ -8,7 +8,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import IconButton from '@material-ui/core/IconButton';
-import useStyles from './productCard-jss';
+import useStyles from './cartCard-jss';
 import { useTheme } from '@material-ui/core/styles'
 import { useRouter } from 'next/router';
 import Link from 'next/link'
@@ -16,16 +16,18 @@ import PropTypes from 'prop-types';
 import { Typography } from '@material-ui/core';
 import Skeleton from '@material-ui/lab/Skeleton';
 import Divider from '@material-ui/core/Divider';
+import RemoveIcon from '@material-ui/icons/Remove';
+import AddIcon from '@material-ui/icons/Add';
 import { useCookies } from 'react-cookie';
 
 
-export default function ProductCard(props) {
+export default function CartCard(props) {
     const {
         id,
         name,
         image,
         price,
-        description,
+        quantity,
         isLoading
     } = props
     const theme = useTheme();
@@ -34,8 +36,7 @@ export default function ProductCard(props) {
 
     const [cookies, setCookie, removeCookie] = useCookies(["cart"]);
 
-    const handleCart = () =>{
-        
+    const handleAdd = () =>{
         var cookieOptions = {
             //expires: new Date(60 * 60 * 5 * 1000), // in milliseconds - 5hrs
             path: "/"
@@ -46,9 +47,34 @@ export default function ProductCard(props) {
             setCookie("cart", clone, cookieOptions)
         } else {
             setCookie("cart", [name], cookieOptions);
+        }   
+    }
+
+    const handleRemove = () =>{
+        var cookieOptions = {
+            //expires: new Date(60 * 60 * 5 * 1000), // in milliseconds - 5hrs
+            path: "/"
         }
-        
-        
+        if (cookies.cart){
+            let clone = [...cookies.cart]
+            let index = clone.indexOf(name);
+            clone.splice(index, 1)
+            setCookie("cart", clone, cookieOptions)
+        }
+    }
+
+    const handleClick = () =>{
+        var cookieOptions = {
+            //expires: new Date(60 * 60 * 5 * 1000), // in milliseconds - 5hrs
+            path: "/"
+        }
+        if (cookies.cart){
+            let clone = cookies.cart.filter((item)=>{
+                return item !== name
+            })
+            
+            setCookie("cart", clone, cookieOptions)
+        }
     }
 
     return (
@@ -92,58 +118,54 @@ export default function ProductCard(props) {
                         </Skeleton>
                     }
                     
-                </div>
-                
-                {
-                    !isLoading ?
-                    <Typography 
-                        variant="body2" 
-                        color="textSecondary" 
-                        component="p"
-                        classes={{root:classes.description}}
-                    >
-                        {description} 
-                        <span className={classes.hidden}>{description}</span>
-                        <span className={classes.hidden}>{description}</span>
-                        <span className={classes.hidden}>{description}</span>
-                    </Typography>
-                    :
-                    <Skeleton width="100%" height={20} >
-                        <Typography variant="h5">.</Typography>
-                    </Skeleton>
-                }
-                
+                </div>   
             </CardContent>
 
         <CardActions classes={{root:classes.cardBottom}}>
             {
                 !isLoading ?
-                <IconButton 
+                <div style={{color: "white"}}>
+                    <IconButton
+                        onClick={handleRemove}
+                        size="small"
+                        classes={{root:classes.quantityIconButton}}
+                    >
+                        <RemoveIcon classes={{root:classes.quantityIcon}} />
+                    </IconButton>
+                    <span className={classes.quantity}>{quantity}</span>
+                    <IconButton
+                        onClick={handleAdd}
+                        size="small"
+                        classes={{root:classes.quantityIconButton}}
+                    >
+                        <AddIcon classes={{root:classes.quantityIcon}} />
+                    </IconButton>
+                </div>
+                :
+                <Skeleton variant="rect" width="20px" height="10px" />
+            }
+            <div>
+                <Button 
                     size="small" 
                     classes={{root: classes.cardButton}}
-                    onClick={handleCart} 
+                    color="secondary" 
+                    variant="contained"
+                    onClick={handleClick}
+                    disabled={isLoading}
                 >
-                    <AddShoppingCartIcon />
-                </IconButton>
-                :
-                <IconButton 
-                    size="small" 
-                    classes={{root: classes.cardButton}} 
-                    disabled
-                >
-                    <AddShoppingCartIcon />
-                </IconButton>
-            }
+                    Remove
+                </Button>
+            </div>
         </CardActions>
       </Card>
     );
 }
 
-ProductCard.propTypes = {
+CartCard.propTypes = {
     name: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
+    quantity: PropTypes.string.isRequired,
     isLoading: PropTypes.bool,
     id: PropTypes.number.isRequired
 }
