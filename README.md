@@ -1,4 +1,8 @@
+# Mercury Mart
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+## Demo Website
+:point_right: https://mercury-mart.vercel.app/
 
 ## Getting Started
 

@@ -15,7 +15,7 @@ export default function Dashboard(props){
                 <Grid item classes={{root: classes.reportCards}}>
                     <Grid container spacing={3}>
                     {[0, 1, 2, 3].map((value) => (
-                        <Grid key={value} item xs={12} sm={6} md={3}>
+                        <Grid key={value} item xs={12} sm={3} md={3}>
                             <ReportCard title="Total Revenue Earned Yesterday" />
                         </Grid>
                     ))}
@@ -26,10 +26,10 @@ export default function Dashboard(props){
                     //backgroundColor: "orange"
                     }}>
                     <Grid container spacing={3}>
-                       <Grid item xs sm md={6}>
+                       <Grid item xs sm={12} md={6}>
                            <ChartSummary />
                        </Grid>
-                       <Grid item xs sm md={6}>
+                       <Grid item xs sm={12} md={6}>
                            <ProductSummary />
                        </Grid>
                     </Grid>

@@ -11,7 +11,11 @@ const fetcher = (...args) => axios.get(...args)
 const productFetcher = (...args) => axios.get(...args)
 .then((response)=> response.data.objectValue);
 
-
+const cartFetcher = (url, token) => axios({
+    method: 'get',
+    url: url,
+    headers: {'Authorization': `Bearer ${token}`}
+})
 export function useProduct () {
     const { data, error } = useSWR(process.env.PRODUCTS_API, productFetcher)
     return {
@@ -25,6 +29,15 @@ export function useCategories(){
     const { data, error } = useSWR(process.env.CATEGORY_API, fetcher)
     return{
         categories: data,
+        isLoading: !error && !data,
+        isError: error
+    }
+}
+
+export function useCart(token){
+    const { data, error } = useSWR(process.env.CART_API, url => cartFetcher(url, token))
+    return{
+        cart: data,
         isLoading: !error && !data,
         isError: error
     }

@@ -131,12 +131,12 @@ export default function OrderTable(props){
 
     return(
        
-           <TableBackbone
-           enableCheckBoxPading
-           enableEmptyRows
-               generateCellsCallback={generateCells}
-               headRow={headerColumns}
-               bodyRows={data}
+           <SkeletonTableBackbone
+                enableCheckBoxPading
+                enableEmptyRows
+                generateCellsCallback={generateCells}
+                headRow={headerColumns}
+                bodyRows={data}
             />   
        
     )

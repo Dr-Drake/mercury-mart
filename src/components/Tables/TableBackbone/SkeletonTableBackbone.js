@@ -94,7 +94,7 @@ export default function SkeletonTabelBackBone(props){
                 cells.push(
                     <TableCell 
                     //style={{width: "30%"}}
-                    key={labelId} 
+                    key={row[cell]} 
                     component="th" 
                     id={labelId} 
                     scope="row"
@@ -110,7 +110,7 @@ export default function SkeletonTabelBackBone(props){
                 )
             } else {
                 cells.push(
-                    <TableCell align="left" classes={{root:classes.tableCell}}  key={labelId} >
+                    <TableCell align="left" classes={{root:classes.tableCell}}  key={row[cell]} >
                         {
                             isLoading ?
                             <Skeleton count={1} /> :

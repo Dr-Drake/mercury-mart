@@ -117,7 +117,7 @@ export default function ProductTable(props){
                         component="th" 
                         id={labelId} 
                         scope="row"
-                        key={labelId} 
+                        key={row[cell]} 
                     >
                         <div className={classes.nameCellDiv}>
                             <div className={classes.imageDiv}>
@@ -146,7 +146,7 @@ export default function ProductTable(props){
                     <TableCell 
                     classes={{root: classes.tableCell}}  
                     align="left"
-                    key={labelId} 
+                    key={row[cell]} 
                     >
                         {
                             isLoading ?
@@ -196,11 +196,11 @@ export default function ProductTable(props){
 
 ProductTable.propTypes={
     data: PropTypes.arrayOf(PropTypes.shape({
-        client: PropTypes.string,
-        orderNo: PropTypes.number,
+        name: PropTypes.string,
         cost: PropTypes.number,
+        price: PropTypes.number,
+        category: PropTypes.string,
         date: PropTypes.string,
-        status: PropTypes.string
-
+        quantity: PropTypes.number
     })),
 }

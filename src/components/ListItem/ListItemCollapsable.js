@@ -16,7 +16,8 @@ function ListItemCollapsable(props){
         listItemTextProps,
         text,
         Icon,
-        router
+        router,
+        condensed
     } = props;
 
     var active = criteria.includes(router.pathname);
@@ -37,10 +38,10 @@ function ListItemCollapsable(props){
                 {Icon && <ListItemIcon {...listIconProps}>
                    <Icon />
                 </ListItemIcon>}
-                <ListItemText
+                { !condensed && <ListItemText
                 inset={Icon ? false : true} 
                 primary={text} 
-                {...listItemTextProps} />
+                {...listItemTextProps} />}
                 {open ? <ExpandLess {...listIconProps} /> : <ExpandMore {...listIconProps} />}
             </ListItem>
 

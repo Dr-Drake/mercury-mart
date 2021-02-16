@@ -18,6 +18,13 @@ const useStyles = makeStyles( (theme) =>({
     title:{
         fontWeight: 500,
         textTransform: "uppercase",
+        fontSize: '2.125rem',
+        [theme.breakpoints.down('md')]: {
+            fontSize: '2rem',
+        },
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '1.4rem',
+        },
         //color: "#D06645"
     },
 
@@ -33,6 +40,30 @@ const useStyles = makeStyles( (theme) =>({
 
     checkoutButton:{
         marginLeft: 10,
+    },
+
+    emptyCartArea:{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+    },
+
+    emptyCartImg:{
+        //justifySelf: "center"
+    },
+
+    imgCaption:{
+        fontWeight: 700,
+        margin: "6px 0",
+    },
+
+    emptyDescription:{
+        margin: "10px 0",
+    },
+
+    backdrop: {
+        zIndex: 10000,
+        color: '#fff',
     },
 }))
 
