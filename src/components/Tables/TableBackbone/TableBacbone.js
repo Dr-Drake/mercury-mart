@@ -317,4 +317,4 @@ TabelBackBone.propTypes = {
     generateCellsCallback: PropTypes.func,
     rowIndentifier: PropTypes.any,
     title: PropTypes.any,
-  };
+};

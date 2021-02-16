@@ -1,6 +1,14 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme)=>({
+    nav:{
+        backgroundColor: "#191c24", 
+        maxWidth: "220px",
+        minWidth: "220px",
+        minHeight: "100vh", 
+        zIndex: 11,
+    },
+
     logo: {
         color: "white",
         fontWeight: "700",
@@ -50,6 +58,6 @@ const useStyles = makeStyles({
     divider:{
         backgroundColor: "#6c7293",
     }
-})
+}))
 
 export default useStyles;

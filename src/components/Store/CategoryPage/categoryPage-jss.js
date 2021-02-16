@@ -17,6 +17,13 @@ const useStyles = makeStyles( (theme) =>({
     title:{
         fontWeight: 500,
         textTransform: "uppercase",
+        fontSize: '2.125rem',
+        [theme.breakpoints.down('md')]: {
+            fontSize: '2rem',
+        },
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '1.4rem',
+        },
         //color: "#D06645"
     }
 }))

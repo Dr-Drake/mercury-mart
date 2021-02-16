@@ -56,7 +56,7 @@ function FrontPage(props){
                         <Typography
                             variant="h2"
                             align="center"
-                            noWrap
+                            //noWrap
                             classes={{root: classes.title}}
                         >
                             Our Tech is out of this world

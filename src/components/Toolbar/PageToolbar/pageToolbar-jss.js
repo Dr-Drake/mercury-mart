@@ -36,6 +36,7 @@ const useStyles = makeStyles({
 
     addProductButton:{
         backgroundColor: "#00d25b",
+        zIndex: 0,
         color: "white",
         boxSizing: "border-box",
         '&:hover':{

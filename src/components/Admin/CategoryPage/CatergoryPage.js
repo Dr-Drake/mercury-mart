@@ -76,22 +76,22 @@ function CategoryPage(props){
 
         switch(operator){
             case "contains":
-                return lowerField.toLowerCase().includes(inputValue);
+                return lowerField.toLowerCase().includes(inputValue.toLowerCase());
             
             case "equals":
-                return lowerField.toLowerCase() === inputValue
+                return lowerField.toLowerCase() === inputValue.toLowerCase()
             
             case "starts with":
-                return lowerField.toLowerCase().startsWith(inputValue);
+                return lowerField.toLowerCase().startsWith(inputValue.toLowerCase());
 
             case "greater than":
-                return lowerField.toLowerCase() > inputValue;
+                return lowerField.toLowerCase() > inputValue.toLowerCase();
 
             case "less than":
-                return lowerField.toLowerCase() < inputValue;
+                return lowerField.toLowerCase() < inputValue.toLowerCase();
             
             default:
-                return lowerField.toLowerCase().endsWith(inputValue);
+                return lowerField.toLowerCase().endsWith(inputValue.toLowerCase());
         }
     }
 

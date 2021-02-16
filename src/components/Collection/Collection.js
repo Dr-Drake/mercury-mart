@@ -5,10 +5,12 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemCollapsable from '../ListItem/ListItemCollapsable';
 import Link from "next/link";
 import useStyles from './collection-jss';
-import CollectionContext from '../../contexts/CollectionContext';
 
 export default function Collection(props){
-    const { list } = props;
+    const { 
+        list,
+        condensed
+    } = props;
     const classes = useStyles();
     const listItemProps = {
         classes : {root: classes.link, selected: classes.linkSelected},
@@ -50,12 +52,12 @@ export default function Collection(props){
                             <Icon />
                         </ListItemIcon>}
 
-                        <ListItemText
+                        { !condensed && <ListItemText
                         inset={Icon ? false : true}
                         classes={ textClasses ? textClasses :
                             {primary: classes.menuItems}
                         } 
-                        primary={link.text} />
+                        primary={link.text} />}
 
                     </ListItemLink>
                 </Link>
@@ -76,7 +78,9 @@ export default function Collection(props){
             Icon={link.icon}
             listIconProps={listIconProps}
             listItemTextProps={listItemTextProps}
-            listItemProps={listItemProps}>
+            listItemProps={listItemProps}
+            condensed={condensed}
+            >
                 <List>
                     {link.subitems.map((item, i)=>{
                         return generateLink(item, i+index, false, false, itextClass);

@@ -57,7 +57,7 @@ export default function OrderToolbar(props){
             indexes.push(i);
             filters.push({index: i, field, operator, inputValue})
           }
-      }
+        }
         panels.push(
           <Collapse in={open} timeout="auto" unmountOnExit>
             <div style={{display: "flex"}}> 

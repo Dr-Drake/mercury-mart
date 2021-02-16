@@ -21,15 +21,15 @@ const mapDispatchToProps = {
 }
 
 function CategoryPage(props){
-    const { name } = props
+    
     const theme = useTheme();
     const classes = useStyles(theme);
     const router = useRouter();
+    const name = router.query.name
     const { products, isLoading } = useProduct();
 
     React.useEffect(()=>{
-        
-        if (isLoading === false){
+        if (isLoading === false && name){
             let seen = [];
             let data = [];
 
@@ -38,14 +38,14 @@ function CategoryPage(props){
                 if (seen.includes(product.productName) === false){
                     seen.push(product.productName);
 
-                    if (product.category.categoryName.toLowerCase()=== name.toLowerCase()){
+                    if (product.category.categoryName.toLowerCase() === name.toLowerCase()){
                         data.push(product)
                     }
                 }
             }
             props.loadProducts(data);
         }
-    }, [isLoading, products])
+    }, [isLoading, products, name])
 
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState("");

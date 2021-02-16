@@ -5,6 +5,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   background-color: #DBCECA;
+  height: 100%;
   /*background-image: url("/red-planet.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;

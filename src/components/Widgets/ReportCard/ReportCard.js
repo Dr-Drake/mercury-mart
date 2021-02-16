@@ -3,6 +3,7 @@ import CardContent from '@material-ui/core/CardContent';
 import ReceiptOutlinedIcon from '@material-ui/icons/ReceiptOutlined';
 import BookmarkBorderOutlinedIcon from '@material-ui/icons/BookmarkBorderOutlined';
 import useStyles from "./reportCard-jss";
+import PropTypes from 'prop-types';
 
 export default function ReportCard(props){
     const classes = useStyles();
@@ -51,3 +52,11 @@ export default function ReportCard(props){
     )   
 
 }
+
+ReportCard.propTypes = {
+    title: PropTypes.string,
+    value: PropTypes.number,
+    Icon: PropTypes.func,
+    SummaryIcon: PropTypes.func,
+    summary: PropTypes.string
+};
