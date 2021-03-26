@@ -1,11 +1,12 @@
 module.exports = {
     env:{
-        PRODUCTS_API: "https://mercurymart.azurewebsites.net/api/products",
-        DELETE_PRODUCTS: "https://mercurymart.azurewebsites.net/api/products/Delete", 
-        CATEGORY_API: "https://mercurymart.azurewebsites.net/api/Categories",
-        DELETE_CATEGORY: "https://mercurymart.azurewebsites.net/api/Categories/Delete", 
-        ADMIN_AUTH: "https://mercurymart.azurewebsites.net/api/Auth/Login",
-        CUSTOMER_REGISTER: "https://mercurymart.azurewebsites.net/api/CustomerManagement",
-        CART_API: "https://mercurymart.azurewebsites.net/api/CustomerCartItems",  
+        HOST: `https://mercury-mart.herokuapp.com`,
+        PRODUCTS_API: `${this.HOST}/api/products`,
+        DELETE_PRODUCTS: `${this.HOST}/api/products/Delete`, 
+        CATEGORY_API: `${this.HOST}/api/Categories`,
+        DELETE_CATEGORY: `${this.HOST}/api/Categories/Delete`,
+        ADMIN_AUTH: `${this.HOST}/api/Auth/Login`,
+        CUSTOMER_REGISTER: `${this.HOST}/api/CustomerManagement`,
+        CART_API: `${this.HOST}/api/CustomerCartItems`, 
     }
 }
